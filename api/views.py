@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from threading import Thread
+from django.core.mail import send_mail
+from django.conf import settings
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -7,6 +10,17 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer, PostSerializer
 from .models import Post
+
+@api_view(['GET'])
+def getRoutes(request):
+    routes = [
+        'api/token',
+        'api/token/refresh',
+        'signup/',
+        'posts/',
+        'post/new/'
+    ]
+    return Response(routes)
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -25,6 +39,13 @@ def createUser(request):
     if serializer.is_valid(raise_exception=True):
         try:
             serializer.save()
+            send_mail(
+                '[Wall App]Account Registration',
+                'Mensagem provisória.',
+                settings.EMAIL_HOST_USER,
+                [data['email']],
+                fail_silently=False,
+            )
             return Response(serializer.data)
         except:
             raise serializers.ValidationError({"Username": "Username already exists"})
@@ -39,11 +60,11 @@ def getPosts(request):
 @permission_classes([IsAuthenticated])
 def createPost(request):
     data = request.data
-    if (len(data['post']) == 0):
+    if (len(data['post_message']) == 0):
         raise serializers.ValidationError({"Post": "Post can't be empty."})
     post_message = Post.objects.create(
         owner = request.user,
-        post=data['post']
+        post_message=data['post_message']
     )
     serializer = PostSerializer(post_message, many=False)
     return Response(serializer.data)
