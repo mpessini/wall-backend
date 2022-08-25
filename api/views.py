@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from threading import Thread
+from django.template.loader import render_to_string 
 from django.core.mail import send_mail
 from django.conf import settings
 from rest_framework.response import Response
@@ -35,13 +34,15 @@ class MyTokenObtainPairView(TokenObtainPairView):
 @api_view(['POST'])
 def createUser(request):
     data = request.data
+    context = {'username': data['username']}
+    message = render_to_string('registration-account.txt.j2', context)
     serializer = UserSerializer(data=data)
     if serializer.is_valid(raise_exception=True):
         try:
             serializer.save()
             send_mail(
                 '[Wall App]Account Registration',
-                'Mensagem provisória.',
+                message,
                 settings.EMAIL_HOST_USER,
                 [data['email']],
                 fail_silently=False,
