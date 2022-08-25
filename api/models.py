@@ -8,4 +8,4 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     def __str__(self):
-        return self.post[0:50]
+        return self.post_message[0:50]

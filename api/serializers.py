@@ -8,6 +8,7 @@ class UserSerializer(ModelSerializer):
     email = serializers.EmailField()
     username = serializers.CharField(min_length=3, max_length=24)
     password = serializers.CharField(min_length=8, max_length=50)
+    
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'password']
@@ -15,9 +16,9 @@ class UserSerializer(ModelSerializer):
           'password': {'write_only': True, "required": True}
         }
 
-        def create(self, validated_data):
-            user = User.objects.create_user(**validated_data)
-            return user
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
 
 class UserPostOwnerSerializer(UserSerializer):
     class Meta:
