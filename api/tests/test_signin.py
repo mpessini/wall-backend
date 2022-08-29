@@ -37,7 +37,7 @@ class TestView(TestCase):
             'password': 'invalidPassword'
         }
         response = self.client.post(self.token_obtain_pair, data=userCredentials)
-        self.assertEqual(response.data['detail'], 'Incorrect username or password.') 
+        self.assertEqual(response.data['detail'], 'No active account found with the given credentials') 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
     
     def test_unable_to_sign_in_with_invalid_username(self):
@@ -46,5 +46,5 @@ class TestView(TestCase):
             'password': 'password'
         }
         response = self.client.post(self.token_obtain_pair, data=userCredentials)
-        self.assertEqual(response.data['detail'], 'Incorrect username or password.') 
+        self.assertEqual(response.data['detail'], 'No active account found with the given credentials') 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
