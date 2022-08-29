@@ -45,6 +45,7 @@ pip install -r requirements.txt
 ```
 
 6. Create your environment file using `.env.example` as an example
+- The `.env.exemple` was configurated to send email only on console, if you want to send real emails, change `EMAIL_BACKEND` value to `django.core.mail.backends.smtp.EmailBackend`
 
 7. Create project migrations
 ```bash
