@@ -24,9 +24,46 @@ git clone git@github.com:mpessini/wall-backend.git
 cd wall-backend
 ```
 
+3. Create a virtual environment
+```bash
+python3 -m venv env
+```
+
+4. Active the virtual environment
+- Linux/MacOs
+```bash
+source env/bin/activate
+```
+- Windows
+```bash
+env\Scripts\activate
+```
+
+5. Install project requirements
+```bash
+pip install -r requirements.txt
+```
+
+6. Create your environment file using `.env.example` as an example
+
+7. Create project migrations
+```bash
+python manage.py makemigrations
+```
+```bash
+python manage.py migrate
+```
+
+8. Run the project
+```bash
+python manage.py runserver
+```
 
 ## Tests
-TBD
+- To run tests, you need to run the command below
+```bash
+python manage.py test
+```
 
 ## Contacts
 * [Marcelo Pessini](mailto:marceloppessini@gmail.com)
