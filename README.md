@@ -7,7 +7,7 @@
 
 ![Wall](wall.png)
 
-In this project users can create a new account, sign in or enter as a visitor. Users can create a post on a wall if they are logged, or just read the posts, if they aren't.
+In this project, users can create a new account, sign in or enter as a visitor. Users can create a post on a wall if they are logged, or just read the posts, if they aren't.
 This project was built using [Django](https://www.djangoproject.com/), [Django Rest Framework](https://www.django-rest-framework.org/) and [JWT](https://jwt.io/).
 
 ## Installation
@@ -45,7 +45,7 @@ pip install -r requirements.txt
 ```
 
 6. Create your environment file using `.env.example` as an example
-- The `.env.exemple` was configurated to send email only on console, if you want to send real emails, change `EMAIL_BACKEND` value to `django.core.mail.backends.smtp.EmailBackend`
+- The `.env.exemple` was configured to send email only on console, if you want to send real emails, change `EMAIL_BACKEND` value to `django.core.mail.backends.smtp.EmailBackend`
 
 7. Create project migrations
 ```bash
